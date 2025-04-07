@@ -2,9 +2,7 @@
    Zidio Task Management is a powerful web-based task management system designed to help users efficiently create, track, and manage tasks. Built using the MERN (MongoDB, Express, 
    React, Node.js) stack, this platform provides a seamless experience with real-time collaboration, analytics, and task visualization.
    
-   Frontend: https://zidio-task-management-ruby.vercel.app/
-   Backend: https://zidio-task-management-api.vercel.app/
-
+   
 ✨ Features
   📊 Dashboard Overview
   📝 Task Assignment: Assign tasks with a title, description, due date, and status.
@@ -26,29 +24,6 @@
   🕒 24/7 customer support
   🛠️ Customizable workflows
   
-💼 Careers at Zidio
-Become part of an innovative team and help shape the future of task management! We are looking for passionate individuals to build powerful solutions.
-  💡 Available Positions:
-  💻 Frontend Developer
-  🔧 Backend Developer
-  🎨 UI/UX Designer
-  📋 Project Manager
-
-📩 Contact Us
-We would love to hear from you! Reach out via email or phone:
-  📧 Email: support@zidiotaskmanager.com
-  📞 Phone: +91 123 9088 123
-  📍 Address: 123 Task Manager, Bengaluru, India
-
-👨‍💻 Meet Our Team
-We are a team of 7 dedicated developers, designers, and project managers, committed to delivering top-notch solutions.
-
-  🏆 Tarun - Project Manager
-  👨‍💻 Tanmoy Das - Full Stack Developer
-  🎨 Gayatri Sawant - Frontend Developer
-  🔧 Satya Prakash - Backend Developer
-  🖥️ Pavan Gowda - Backend Developer
-  🛠️ Pradi - Backend Developer
 
 🏗️ Tech Stack
   🖥️ Frontend: React.js, Tailwind CSS
@@ -65,8 +40,8 @@ Follow these steps to set up the project locally:
   2.MongoDB (local or cloud instance) 🗄️
  
 🔄 Clone the Repository
-   git clone https://github.com/yourusername/zidio-task-management.git
-   cd zidio-task-management
+  git clone https://github.com/your-username/zidio-task-management.git
+cd zidio-task-management
 
 ⚙️ Backend Setup
    cd backend
@@ -80,9 +55,10 @@ Follow these steps to set up the project locally:
 
 🔑 Environment Variables
    Create a .env file in the backend directory and add the following:
-   PORT=5000
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_secret_key
+    PORT=5000
+   MONGO_URI=mongodb://localhost:27017/zidio
+   JWT_SECRET=your_jwt_secret_key
+
 
 🎯 Usage
    🔐 Sign Up / Log In to access the task management dashboard.
@@ -103,3 +79,6 @@ Follow these steps to set up the project locally:
 This project is licensed under the MIT License.
 
 🚀 Boost your productivity with Zidio Task Management! 🚀
+
+🙋 Author
+Kunal Dhavse
