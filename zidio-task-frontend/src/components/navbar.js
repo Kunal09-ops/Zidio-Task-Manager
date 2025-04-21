@@ -29,6 +29,8 @@ const Navbar = () => {
           <Link to="/contact" className="hover:text-gray-200">Contact Us</Link>
           <Link to="/dashboard" className="hover:text-gray-200">Dashboard</Link>
           <Link to="/trash" className="hover:text-gray-200">Trash</Link>
+          <Link to="/meeting">Go to Meeting</Link>
+
         </div>
 
         {/* Mobile Menu Button */}

@@ -16,17 +16,21 @@
     "react-script": "^2.0.5",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.3",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.8.1",
     "toast": "^0.5.4",
     "web-vitals": "^4.2.4",
     "yocto-queue": "^1.2.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+  
+ "scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+},
+
+
   "eslintConfig": {
     "extends": [
       "react-app",

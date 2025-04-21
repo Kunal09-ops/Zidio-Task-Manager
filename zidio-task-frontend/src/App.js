@@ -13,12 +13,28 @@ import Auth from "./components/Auth";
 import Dashboard from "./components/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/navbar";
+import MeetingRoom from './pages/MeetingRoom';
+import { useLocation } from 'react-router-dom';
+
+const Layout = ({ children }) => {
+  const location = useLocation();
+
+  return (
+    <>
+      <Navbar />
+      <main className="container mx-auto">{children}</main>
+      {location.pathname !== '/meeting' && <Footer />}
+    </>
+  );
+};
+
 const App = () => {
   return (
     <AuthProvider>
       <Router>
       <Navbar/>
         {/* <Header /> */}
+        
         
         <main className="container mx-auto">
           <Routes>
@@ -30,9 +46,13 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            
+            <Route path="/meeting" element={<MeetingRoom />} />
+            
           </Routes>
+               
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </AuthProvider>
   );
