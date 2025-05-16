@@ -3,6 +3,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const socketIo = require("socket.io");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
@@ -12,21 +13,44 @@ const authRoutes = require("./routes/authRoutes");
 const aboutRoutes = require("./routes/aboutRoutes"); // Import About Routes
 const Feedback = require("./models/feedback");
 const Task = require("./models/Task");
+const meetingRoutes = require('./routes/meetingRoutes');
 dotenv.config();
 connectDB();
 
 const app = express();
 const server = http.createServer(app);
+const adminRoutes = require('./routes/adminRoutes');
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3003", // React app URL
+    origin: "http://localhost:3000", // React app URL
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
+// app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminRoutes); // ✅ required
+app.use('/api/meeting', meetingRoutes);
+
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+ origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+
+
+}));
+
+
+// mongoose.connect('mongodb://localhost:27017/zidio', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+// .then(() => console.log("MongoDB connected"))
+//   .catch(err => console.error("MongoDB connection error:", err));
+
+app.use('/api/tasks', require('./routes/taskRoutes'));
+
 app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/feedback", feedbackRoutes);
@@ -144,12 +168,67 @@ app.post("/feedback", async (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  // console.log("A user connected");
+  console.log("A user connected");
 
   socket.on("disconnect", () => {
-    // console.log("A user disconnected");
+    console.log("A user disconnected");
   });
 });
+
+// let participants = {};
+
+
+  // socketIo.on("join-meeting", ({ meetingId, name }) => {
+  //   participants[socket.id] = { meetingId, name };
+  //   const current = Object.values(participants).filter(p => p.meetingId === meetingId);
+  //   io.to(meetingId).emit("participants-update", current);
+  //   socketIo.join(meetingId);
+  // });
+
+  // socketIo.on("disconnect", () => {
+  //   const { meetingId } = participants[socketIo.id] || {};
+  //   delete participants[socketIo.id];
+  //   const current = Object.values(participants).filter(p => p.meetingId === meetingId);
+  //   io.to(meetingId).emit("participants-update", current);
+  //   console.log("🔴 Disconnected:", socketIo.id);
+  // });
+
+
+// ✅ Correct pattern: use `connection` event
+// io.on("connection", (io) => {
+//   console.log("✅ New socket connection:", io.id);
+
+//   io.on("join-meeting", ({ meetingId, name }) => {
+//     console.log(`${name} joined meeting: ${meetingId}`);
+//    io.join(meetingId);
+
+//     // Broadcast to others in the room
+//     io.to(meetingId).emit("user-joined", { name, id: io.id });
+//   });
+
+//  io.on("disconnect", () => {
+//     console.log("User disconnected:", io.id);
+//   });
+// });
+io.on("connection", (socket) => {
+  console.log("✅ Connected:", socket.id);
+
+  socket.on("join-meeting", ({ meetingId, name }) => {
+    socket.join(meetingId);
+    console.log(`${name} joined ${meetingId}`);
+
+    io.to(meetingId).emit("user-joined", { id: socket.id, name });
+  });
+
+  socket.on("disconnect", () => {
+    console.log("❌ Disconnected:", socket.id);
+  });
+});
+
+
+
+
+
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log(`🚀Server running on port ${PORT}`));
