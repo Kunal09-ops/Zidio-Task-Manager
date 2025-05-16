@@ -40,7 +40,7 @@ Follow these steps to set up the project locally:
   2.MongoDB (local or cloud instance) 🗄️
  
 🔄 Clone the Repository
-  git clone https://github.com/your-username/zidio-task-management.git
+  git clone https://github.com/Kunal09-ops/zidio-task-management.git
 cd zidio-task-management
 
 ⚙️ Backend Setup
